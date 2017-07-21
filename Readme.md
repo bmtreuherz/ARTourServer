@@ -7,11 +7,11 @@ Serving up some big wins and some fair event registration!
 Here is an outline of all the routes on the server, as well as their required
 parameters and responses.
 
-### Authentication
+## Authentication
 
-#### /auth/login
+### /auth/login
 
-Required Parameters
+Request parameters must be of the form:
 
 ```
 {
@@ -20,9 +20,7 @@ Required Parameters
 }
 ```
 
-Response Example
-
-Success:
+A successful login will return a response similar to:
 
 ```
 {
@@ -40,7 +38,7 @@ Success:
 }
 ```
 
-Failure:
+A failed login will return a response similar to:
 ```
 {
     "success": false,
@@ -50,7 +48,7 @@ Failure:
 
 ### /auth/signup
 
-Required Parameters
+Request parameters must be of the form:
 
 ```
 {
@@ -60,9 +58,8 @@ Required Parameters
 }
 ```
 
-Response Example
+A successful signup will return a response similar to:
 
-Success:
 
 ```
 {
@@ -80,7 +77,7 @@ Success:
 }
 ```
 
-Failure:
+A failed signup will return a response similar to:
 ```
 {
     "success": false,
@@ -102,13 +99,15 @@ If the token is not present, or it is invalid, the request will return a 403 wit
 }
 ```
 
+Currently access tokens are set to expire after 24 hours.
+
 ## Running the Server
 
 You must have node and mongodb installed. I also recommend installing nodemon as it
 will restart the server when files change, as well as some other things that make it nice
 to work with.
 
-The current configuration points to a local instance of mongodb, so you need to be running mongo before starting the server. To do this, just open a terminal window and run
+The current configuration points to a local instance of mongodb, so you need to be running mongo before starting the server. To do this, just open a terminal window and run:
 
 ```
 mongod
@@ -118,16 +117,16 @@ To start the server, in a new terminal window or tab run
 ```
 node app.js
 ```
-or
+or using nodemon
 ```
 nodemon app.js
 ```
 
-I also recomment using ngrok to provide a tunnel to your localhost which will be necessary for the mobile applications to use the server (unless we decide to deploy elsewhere). The server is configure to run on port 8080 so run:
+I also recommend using ngrok to provide a tunnel to your localhost as this will be helpful in allowing the mobile clients to reach the server. The server is configure to run on port 8080 so to open a tunnel run:
 
 ```
 ngrok http 8080
 ```
 
-This will open a tunnel to localhost:8080 and a public url will be shown. This can
+This will open a tunnel to localhost:8080 and a public url will be shown. This url can
 be used to hit the server from other machines.
