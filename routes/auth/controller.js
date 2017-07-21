@@ -7,14 +7,14 @@ exports = module.exports
 exports.login = function(req, res){
   // find the user
   User.findOne({
-    name: req.body.name
+    email: req.body.email
   }, function(err, user) {
 
     if (err) throw err;
 
     if (!user) {
       // User with that name was not found
-      res.json({ success: false, message: 'Authentication failed. Invalid username.' });
+      res.json({ success: false, message: 'Authentication failed. User not found.' });
     } else if (user) {
 
       // check if password matches
@@ -45,23 +45,23 @@ exports.login = function(req, res){
 // Creates a new user.
 exports.signup = function(req, res){
   // TODO: Do better validation on parameters.
-  if (!req.body.name || !req.body.password){
-    res.json({success: false, message: 'You must provide a valid username and password to signup.'});
+  if (!req.body.email || !req.body.password || !req.body.displayName){
+    res.json({success: false, message: 'You must provide a valid email, name, and password to signup.'});
   } else{
     User.findOne({
-      name: req.body.name
+      name: req.body.email
     }, function(err, user) {
 
       if (err) throw err;
 
       if (user) {
         // User with that name was already found
-        res.json({ success: false, message: 'That username is already in use.' });
+        res.json({ success: false, message: 'That email is already in use.' });
       } else {
         var newUser = new User({
-          name: req.body.name,
-          password: req.body.password,
-          admin: false
+          email: req.body.email,
+          displayName: req.body.displayName,
+          password: req.body.password
         });
 
         newUser.save(function(err){

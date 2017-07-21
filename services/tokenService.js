@@ -12,6 +12,7 @@ exports.createToken = function(user){
 
 // Returns how long tokens have before they expire.
 exports.getTokenExpirationTime = function(){
+  // Pretty much just wrapping this so files that work with tokens don't need a dependency on config.
   return config.tokenExpirationTime;
 }
 
