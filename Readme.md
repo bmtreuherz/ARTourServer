@@ -7,9 +7,9 @@ Serving up some big wins and some fair event registration!
 Here is an outline of all the routes on the server, as well as their required
 parameters and responses.
 
-## Authentication
+### Authentication
 
-### /auth/login
+#### /auth/login
 
 Required Parameters
 
@@ -102,7 +102,7 @@ If the token is not present, or it is invalid, the request will return a 403 wit
 }
 ```
 
-### Running the Server
+## Running the Server
 
 You must have node and mongodb installed. I also recommend installing nodemon as it
 will restart the server when files change, as well as some other things that make it nice
@@ -111,7 +111,7 @@ to work with.
 The current configuration points to a local instance of mongodb, so you need to be running mongo before starting the server. To do this, just open a terminal window and run
 
 ```
-mongodb
+mongod
 ```
 
 To start the server, in a new terminal window or tab run
