@@ -49,7 +49,7 @@ exports.signup = function(req, res){
     res.json({success: false, message: 'You must provide a valid email, name, and password to signup.'});
   } else{
     User.findOne({
-      name: req.body.email
+      email: req.body.email
     }, function(err, user) {
 
       if (err) throw err;
