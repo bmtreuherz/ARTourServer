@@ -25,15 +25,15 @@ A successful login will return a response similar to:
 ```
 {
     "success": true,
-    "message": "Login Succesfull!",
-    "token": "eyJhbGciOiJI", // Will be much longer than this
-    "expirationDate": 1508901104, // This is a unix timestamp
+    "message": "Login Succesfull!",    
     "user": {
         "_id": "597199a2dfd4c658bbb82131",
         "email": "bradleymtreuherz@gmail.com",
         "displayName": "Bradley Treuherz",
         "password": "password",
-        "__v": 0
+        "__v": 0,
+        "token": "eyJhbGciOiJI", // Will be much longer than this
+        "tokenExpiration": 1508901104, // This is a unix timestamp
     }
 }
 ```
@@ -65,14 +65,14 @@ A successful signup will return a response similar to:
 {
     "success": true,
     "message": "Signup Succesfull!",
-    "token": "eyJhbGciOiJ,
-    "expirationDate": 1508900722,
     "user": {
         "__v": 0,
         "email": "bradleymtreuherz@gmail.com",
         "displayName": "Bradley Treuherz",
         "password": "password",
-        "_id": "597199a2dfd4c658bbb82131"
+        "_id": "597199a2dfd4c658bbb82131",
+        "token": "eyJhbGciOiJ,
+        "tokenExpiration": 1508900722,
     }
 }
 ```

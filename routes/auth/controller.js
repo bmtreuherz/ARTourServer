@@ -29,13 +29,15 @@ exports.login = function(req, res){
         var expirationDate = new Date();
         expirationDate.setHours(expirationDate.getHours() + tokenService.getTokenExpirationTime());
 
+        var userResponse = user.toObject();
+        userResponse.tokenExpiration = Math.trunc(expirationDate.getTime() / 1000);
+        userResponse.token = token;
+
         // Send the response
         res.json({
           success: true,
           message: 'Login Succesfull!',
-          token: token,
-          expirationDate: Math.trunc(expirationDate.getTime() / 1000),
-          user: user
+          user: userResponse
         });
       }
     }
@@ -74,13 +76,15 @@ exports.signup = function(req, res){
           var expirationDate = new Date();
           expirationDate.setHours(expirationDate.getHours() + tokenService.getTokenExpirationTime());
 
+          var userResponse = newUser.toObject();
+          userResponse.tokenExpiration = Math.trunc(expirationDate.getTime() / 1000);
+          userResponse.token = token;
+
           // Send the response
           res.json({
             success: true,
             message: 'Signup Succesfull!',
-            token: token,
-            expirationDate:Math.trunc(expirationDate.getTime() / 1000),
-            user: newUser
+            user: userResponse
           });
         })
       }
