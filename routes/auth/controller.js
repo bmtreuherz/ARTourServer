@@ -26,11 +26,13 @@ exports.login = function(req, res){
         var token = tokenService.createToken(user);
 
         // Determine the expirationDate of the token.
-        var expirationDate = new Date();
-        expirationDate.setHours(expirationDate.getHours() + tokenService.getTokenExpirationTime());
+        var currentDate = Math.floor(Date.now() / 1000)
+        console.log(currentDate)
+        expirationDate = currentDate + 60 * 60 * tokenService.getTokenExpirationTime();
+        console.log(expirationDate)
 
         var userResponse = user.toObject();
-        userResponse.tokenExpiration = Math.trunc(expirationDate.getTime() / 1000);
+        userResponse.tokenExpiration = expirationDate;
         userResponse.token = token;
 
         // Send the response
@@ -73,11 +75,11 @@ exports.signup = function(req, res){
           var token = tokenService.createToken(newUser);
 
           // Determine the expirationDate of the token.
-          var expirationDate = new Date();
-          expirationDate.setHours(expirationDate.getHours() + tokenService.getTokenExpirationTime());
+          var currentDate = Math.floor(Date.now() / 1000)
+          expirationDate = currentDate + 60 * 60 * tokenService.getTokenExpirationTime();
 
           var userResponse = newUser.toObject();
-          userResponse.tokenExpiration = Math.trunc(expirationDate.getTime() / 1000);
+          userResponse.tokenExpiration = expirationDate;
           userResponse.token = token;
 
           // Send the response
