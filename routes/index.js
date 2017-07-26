@@ -1,6 +1,8 @@
 var Router = require('express').Router;
 var auth = require('./auth');
 var users = require('./users');
+var groups = require('./groups');
+var events = require('./events');
 var tokenService = require('../services/tokenService');
 
 const router = new Router();
@@ -20,7 +22,9 @@ router.use(function(req, res, next) {
 });
 
 // NOTE: All routes after this line will require a valid token
-router.use('/users', users); // TODO: Remove this after testing
+router.use('/users', users); 
+router.use('/groups', groups);
+router.use('/events', events);
 
 
 module.exports = router;

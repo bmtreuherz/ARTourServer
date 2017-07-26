@@ -49,6 +49,7 @@ exports.login = function(req, res){
 // Creates a new user.
 exports.signup = function(req, res){
   // TODO: Do better validation on parameters.
+  // console.log(req)
   if (!req.body.email || !req.body.password || !req.body.displayName){
     res.json({success: false, message: 'You must provide a valid email, name, and password to signup.'});
   } else{
