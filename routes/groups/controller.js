@@ -37,14 +37,14 @@ exports.getMyGroups = function(req, res){
 }
 
 exports.joinGroup = function(req, res){
-  if(!req.body.userID || !req.body.groupName || !req.body.password){
-    res.json({success: false, message: 'Must provide a userID, groupName, and password in your request body.'})
+  if(!req.body.userID || !req.body.name || !req.body.password){
+    res.json({success: false, message: 'Must provide a userID, name, and password in your request body.'})
   } else{
-    Group.findOne({name: req.body.groupName
+    Group.findOne({name: req.body.name, members: { "$ne": req.body.userID}
     }, function(err, group){
       if (err) throw err;
       if(!group){
-        res.json({success: false, message: 'Could not find the group you requested'});
+        res.json({success: false, message: 'Could not join group'});
       } else{
         group.members.push(req.body.userID)
         group.save(function(err){

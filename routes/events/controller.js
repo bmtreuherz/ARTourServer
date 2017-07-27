@@ -1,7 +1,8 @@
 var Event = require('../../models/event');
+var Group = require('../../models/group');
 
 exports = module.exports
-
+// TODO: Change param names to be less bad.
 
 // Takes in group
 exports.createEvent = function(req, res){
