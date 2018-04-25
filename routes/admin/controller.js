@@ -1,5 +1,6 @@
 var Feature   = require('../../models/feature');
 var Script    = require('../../models/script');
+var Seed  = require('./seed');
 
 exports = module.exports
 
@@ -154,4 +155,43 @@ exports.deleteScript = function(req, res){
       });
     })
   }
+}
+
+exports.reset = function(req, res){
+  // Remove everything
+  Feature.remove({}, function(err){
+    if (err) throw err;
+  });
+  Script.remove({}, function(err){
+    if (err) throw err;
+  });
+
+  var features = Seed.getFeatures();
+  features.forEach(function(feature){
+    new Feature({
+      name: feature.name,
+      beaconID: feature.beaconID,
+      long: feature.long,
+      lat: feature.lat,
+      imageLink: feature.imageLink
+    }).save(function(err){
+      if (err) throw err;
+    });
+  })
+
+  var scripts = Seed.getScripts();
+  scripts.forEach(function(script){
+    new Script({
+      beaconID: script.beaconID,
+      language: script.language,
+      value: script.value
+    }).save(function(err){
+      if (err) throw err;
+    })
+  })
+
+  res.json({
+    success: true,
+    message: 'Removed All!'
+  });
 }
